@@ -317,7 +317,7 @@ public class RecevoirNouveau extends RecvThread{
 			if(MySingleton.checkRecvPong(pongInfo)){
 				MySingleton.addRecvPong(pongInfo);
 			}else{
-				System.out.println("J'ai ce Pong!");
+				System.out.println("J'ai deja ce Pong!");
 			}
 			//MySingleton.addRecvPong(pongInfo);
 			
@@ -395,7 +395,7 @@ public class RecevoirNouveau extends RecvThread{
 			if(MySingleton.checkRecvQueryHit(queryHitInfo)){
 				MySingleton.addRecvQueryHit(queryHitInfo);
 			}else{
-				System.out.println("J'ai ce Query Hit.");
+				System.out.println("J'ai deja ce Query Hit.");
 			}
 			//MySingleton.addRecvQueryHit(queryHitInfo);
 			

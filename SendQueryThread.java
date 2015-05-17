@@ -22,10 +22,10 @@ public class SendQueryThread extends SendThread{
 	}
 	public void run(){
 		try{
-			System.out.println("**** QUERY Send Thread  START****");
+			System.out.println("**** QUERY Envoyer Fil Commence ****");
 			OutputStream outstream = this.connectionSocket.getOutputStream();
 			sendQueryMessage(outstream);
-			System.out.println("**** QUERY Send Thread END ****");
+			System.out.println("**** QUERY Envoyer Fil Termine ****");
 		}catch(IOException e){
 			System.out.println(e);
 		}

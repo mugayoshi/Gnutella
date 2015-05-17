@@ -50,7 +50,6 @@ public class RecvFile extends RecvThread {
 				}
 				
 			}//end of while loop
-	//		System.out.println("i = " + i);
 			i = 0;
 			this.fileLen = getFileLen(buf);
 			while((s = reader.read(buf, 0, 100)) != -1){
@@ -62,9 +61,9 @@ public class RecvFile extends RecvThread {
 				writtenSize += s;
 				//System.out.println(i + " written size: " + writtenSize);
 				double percent = (double)(writtenSize) / (double)(this.fileLen) * 100;
-				if(percent > 0 && (int)percent % 20 == 0 && i % 10 == 0){
-					System.out.println("written size: " + writtenSize);
-					System.out.println("Done " + percent + "%");
+				if(percent > 0 && (int)percent % 20 == 0){
+					//System.out.println("written size: " + writtenSize);
+					System.out.println("Receiving " + (float)percent + " % Done ");
 				}
 				
 				if(writtenSize >= this.fileLen){// <- Size !!

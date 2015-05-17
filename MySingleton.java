@@ -43,6 +43,9 @@ public class MySingleton {
 	public static MySingleton getInstance(){
 		return obj;
 	}
+	public static int getResultSetSize(){
+		return obj.resultSets.size();
+	}
 	public static byte getNumHop(){
 		return obj.NUM_HOP;
 	}
@@ -89,7 +92,7 @@ public class MySingleton {
 	}
 	
 	public static void showSocket(){
-		System.out.println("Show Socket Method");
+		//System.out.println("Show Socket Method");
 		for(int i = 0; i < obj.socketList.size(); i++){
 			Socket s = obj.socketList.get(i);
 			Integer flag = obj.recvThreadFlag.get(i);
@@ -99,18 +102,18 @@ public class MySingleton {
 	}
 	
 	public static void showResultSets(){
-		System.out.println("---- Show Result Set Method ----");
+		System.out.println("------- Show Result Set Method -------");
 		for(int i = 0; i < obj.resultSets.size(); i++){
-			System.out.println("Result Set Index: " + i);
+			System.out.println("\n----- Result Set Index: " + i + " -----");
 			ResultSet rSet = obj.resultSets.get(i);
 			InfoNouveau info = MySingleton.getInfo(rSet);
 			byte[] ipaddr = info.list.get(2);
 			//System.out.println("IP Address: ");
 			info.showIPAddressLittleEndian(ipaddr);
-			System.out.println("PORT Number: " + info.getPortNumber());
+			System.out.println("\nPORT Number: " + info.getPortNumber());
 			rSet.showMyself();
 		}
-		System.out.println("---- End Show Result Set Method ----");
+		System.out.println("\n------- End Show Result Set Method -------");
 
 	}
 	public static ResultSet getResultSet(int index){
@@ -135,7 +138,7 @@ public class MySingleton {
 	}
 	
 	synchronized public static void showInfo(){
-		System.out.println("----Show Information Method----");
+		System.out.println("----- Montrer Information Method  -----");
 		
 		if(obj.sentPingsList.size() == 0){
 			System.out.println("**** NO SENT PING **** ");

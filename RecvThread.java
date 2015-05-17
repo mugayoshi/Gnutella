@@ -36,53 +36,6 @@ public class RecvThread extends Thread{
 	}
 
 
-	
-	
-	/*public  ArrayList<String> showResultSet(String resultSetBinary, int numHits, String idStr, String ipaddr, String port, String svid){
-		System.out.println("Result Set Num Hits = " + numHits );
-		ArrayList<String> resultSet = new ArrayList<String>();
-		int j;
-		///System.out.println("input's length: " + resultSetBinary.length());
-		for(int i = 0; i < numHits; i++){
-			j = 0;
-			//file index is 4byte
-			String indexBinStr = resultSetBinary.substring(j, j + 4 * 8);
-			Long fileIndex = Long.valueOf(indexBinStr, 2);
-			//file size  is 4bytes
-			j += 4 * 8;
-			String sizeBinStr = resultSetBinary.substring(j, j + 4 * 8);
-			Long fileSize = Long.valueOf(sizeBinStr, 2);
-			j += 4 * 8;
-			int len = returnFileNameLength(resultSetBinary.substring(j));
-			//ATTENTION !! indexes of bin str means bit
-			if(len > 0){
-				String fileNameBin = resultSetBinary.substring(j, j + len * 8);
-				String fileName = getStrFromBinaryFromResultset(fileNameBin);
-				System.out.println("File Index: " + fileIndex
-							+ " File Size: " + fileSize
-							+ "KB\nFile Name: " + fileName);
-				//
-				resultSet.add(fileIndex.toString() + "\n");
-				resultSet.add(fileSize.toString() + "\n");
-				resultSet.add(fileName + "\n");
-				j += len * 8 + 8 * 2;
-				resultSetBinary = resultSetBinary.substring(j);
-				
-				//
-				String indexStr = String.valueOf(fileIndex);
-				MySingleton singleton = MySingleton.getInstance();
-				ResultSet rSet = new ResultSet(idStr, indexStr, fileName, ipaddr, port, svid);
-				singleton.addResulSet(rSet);
-				
-			}else{
-				System.out.println("size of file name is less than 0 !!");
-				break;
-			}
-			
-			
-		}
-		return resultSet;
-	}*/
 	public static int returnFileNameLength(String input){
 		String nullStr = "0000" + "0000";
 		String[] tb = new String[input.length()/ 8];

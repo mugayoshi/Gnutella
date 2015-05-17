@@ -241,12 +241,12 @@ public class InfoNouveau {
 	public String makeIPAddressStr(){
 		byte[] ip = this.list.get(2);
 		String ipaddr = new String();
-		for(int i = 0; i < 4; i++){
+		for(int i = 3; i >= 0; i--){
 			int in = ip[i];
 			if(in < 0){
 				in &= (int)0x000000FF;
 			}
-			if(i < 3){
+			if(i > 0){
 				ipaddr += Integer.toString(in) + ".";
 			}else{
 				ipaddr += Integer.toString(in);

@@ -24,12 +24,12 @@ public class SendQueryHitThread extends SendThread{
 	}
 	public void run(){
 		try{
-			System.out.println("**** QUERY HIT Send thread START *****");
+			System.out.println("**** QUERY HIT Envoyer Fil Commence  *****");
 			OutputStream outstream = this.connectionSocket.getOutputStream();
 			sendQueryHitMessage(outstream);
 
 			outstream.flush();
-			System.out.println("**** QUERY HIT Send thread END *****");
+			System.out.println("**** QUERY HIT Envoyer Fil Termine *****");
 		}catch(IOException e){
 			System.out.println(e);
 		}
@@ -80,7 +80,7 @@ public class SendQueryHitThread extends SendThread{
 			ArrayList<ResultSet> rSets = f.getResultSet(this.searchWord, p.toString());
 			if(rSets.size() == 0){
 
-				byte[] zero = {(byte)0x00};
+		//		byte[] zero = {(byte)0x00};
 				System.out.println("------ NOT FOUND ------");
 				return ;
 			}else{
@@ -108,7 +108,7 @@ public class SendQueryHitThread extends SendThread{
 			
 			payloadlen = putInt(payloadLength);
 			serventIdentifier = makeServentIdentifier(resultSetField.length, this.messageID);
-			int totalSize = 23 + payloadLength;
+		//	int totalSize = 23 + payloadLength;
 			//message = new byte[totalSize];
 			payload = new byte[payloadLength];
 		}

@@ -31,11 +31,11 @@ public class ResultSet {
 		return sum;
 	}
 	public void showMyself(){
-		System.out.print("File Index: ");
+		System.out.print("--File Index: ");
 		showFourBytes(this.index);
-		System.out.print("File Size(KB): ");
+		System.out.print("--File Size(KB): ");
 		showFourBytes(this.size);
-		System.out.println("File Name: " + new String(this.name));
+		System.out.println("--File Name: " + new String(this.name));
 	}
 	public void showFourBytes(byte[] b){
 		int[] in = new int[4];

@@ -33,9 +33,15 @@ public class EnvoyerFichier extends SendThread{
 					outstream.write(initialMessage.getBytes());
 					System.out.println("http Response is sent");
 					byte buf[] = new byte[1024];
-					while(in.read(buf) != -1){
+					int s = 0;
+					int writtenSize = 0;
+					while((s = in.read(buf)) != -1){
 						outstream.write(buf);
-						//System.out.println("buf's length: " + buf.length);
+						writtenSize += s;
+						double percent = (double)(writtenSize) / (double)(len) * 100;
+						if((int)percent % 20 == 0)
+							//System.out.println("Written Size: " + (int)percent);
+							System.out.println("Writing " + (float)percent +  "% DONE");
 					}
 					outstream.flush();
 					in.close();

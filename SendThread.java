@@ -41,6 +41,7 @@ public class SendThread extends Thread{
 	}
 
 	public SendThread(String comm, Socket socket, byte ttl, byte hop, byte[] id){
+		//for relayed Ping
 		this.comm = comm;
 		this.connectionSocket = socket;
 		this.TTL = (byte)ttl;
@@ -51,6 +52,7 @@ public class SendThread extends Thread{
 
 	}
 	public SendThread(String comm, Socket socket, byte ttl, byte hop, byte[] id, ArrayList<byte[]> input){
+		//for relayed Pong
 		this.comm = comm;
 		this.connectionSocket = socket;
 		this.TTL = (byte)ttl;
@@ -73,21 +75,21 @@ public class SendThread extends Thread{
 		//make packets
 
 		try{
-			System.out.println("**** Send Thread Starts ****");
+			System.out.println("**** Envoyer Fil Commence ****");
 			OutputStream outstream = this.connectionSocket.getOutputStream();
 			if(this.comm.equals("OK")){
 				outstream.write("GNUTELLA OK\n\n".getBytes());
 				outstream.flush();
-				System.out.println("**** Gnutella OK is Sent ****");
+				System.out.println("**** Gnutella OK est Envoye ****");
 			}else if(this.comm.equals("PING")){
 				sendPing(this.TTL, this.HOP, outstream);
 				outstream.flush();
-				System.out.println("***** PING is Sent *****");
+				System.out.println("***** PING est Envoye *****");
 			}else if(this.comm.equals("PONG")){
 				sendPong(this.TTL, this.HOP, outstream);
 				outstream.flush();
 				//System.out.println("Pong is sent");
-				System.out.println("***** PONG is Sent *****");
+				System.out.println("***** PONG est Envoye *****");
 
 			}else{
 				String message = this.comm + "\n";

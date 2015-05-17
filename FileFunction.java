@@ -15,7 +15,6 @@ public class FileFunction {
 	
 	public int getSizeOfFileShared(String port){
 		String dirRoot = FILE_ROOT + port;
-//		System.out.println("DIR ROOT = " + dirRoot);
 
 		File dir = new File(dirRoot);
 		File[] files = dir.listFiles();
