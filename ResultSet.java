@@ -1,5 +1,3 @@
-package Gnutella;
-
 import java.nio.ByteBuffer;
 
 
