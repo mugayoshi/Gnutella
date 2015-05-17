@@ -1,3 +1,4 @@
+package Gnutella;
 import java.util.Random;
 
 public class DescriptorHeader{

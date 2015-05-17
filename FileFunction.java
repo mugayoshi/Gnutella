@@ -1,3 +1,5 @@
+package Gnutella;
+
 import java.io.*;
 import java.io.ObjectOutputStream.PutField;
 import java.util.ArrayList;

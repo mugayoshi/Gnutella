@@ -1,3 +1,5 @@
+package Gnutella;
+
 import java.io.*;
 import java.net.*;
 public class UI extends Thread{

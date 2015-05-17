@@ -1,3 +1,5 @@
+package Gnutella;
+
 import java.util.*;
 public class InfoNouveau {
 	ArrayList<byte[]> list;
