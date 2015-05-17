@@ -1,5 +1,3 @@
-package Gnutella;
-
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -121,7 +119,7 @@ public class RecevoirNouveau extends RecvThread{
 		
 		ArrayList<byte[]> al = new ArrayList<byte[]>();
 		al.add(this.payLoadLength);
-		InfoNouveau info = new InfoNouveau(al, this.messageID, this.TTL, this.HOP);
+		MessageInfo info = new MessageInfo(al, this.messageID, this.TTL, this.HOP);
 		if(MySingleton.checkRecvPing(this.messageID)){
 			MySingleton.addRecvPing(info);
 		}else{
@@ -182,7 +180,7 @@ public class RecevoirNouveau extends RecvThread{
 	synchronized public void sendBackQueryHitRelayQuery(){
 //		System.out.println("**** Send Back Query Hit Relay Query ****");
 
-		InfoNouveau queryInfo = new InfoNouveau(this.copyQuery, this.messageID, this.TTL, this.HOP, this.searchWord);
+		MessageInfo queryInfo = new MessageInfo(this.copyQuery, this.messageID, this.TTL, this.HOP, this.searchWord);
 		if(MySingleton.checkRecvQuery(this.messageID)){
 			MySingleton.addRecvQuery(queryInfo);
 			
@@ -315,7 +313,7 @@ public class RecevoirNouveau extends RecvThread{
 			this.copyPong.add(this.numFiles);
 			this.copyPong.add(this.sizeFiles);
 			
-			InfoNouveau pongInfo = new InfoNouveau(this.copyPong, this.messageID, this.TTL, this.HOP);
+			MessageInfo pongInfo = new MessageInfo(this.copyPong, this.messageID, this.TTL, this.HOP);
 			if(MySingleton.checkRecvPong(pongInfo)){
 				MySingleton.addRecvPong(pongInfo);
 			}else{
@@ -393,7 +391,7 @@ public class RecevoirNouveau extends RecvThread{
 			showQueryHitInfo();
 			analyzeResultset(resultsetField);
 			
-			InfoNouveau queryHitInfo = new InfoNouveau(this.copyQueryHit, this.messageID, this.TTL, this.HOP, this.numHits);
+			MessageInfo queryHitInfo = new MessageInfo(this.copyQueryHit, this.messageID, this.TTL, this.HOP, this.numHits);
 			if(MySingleton.checkRecvQueryHit(queryHitInfo)){
 				MySingleton.addRecvQueryHit(queryHitInfo);
 			}else{

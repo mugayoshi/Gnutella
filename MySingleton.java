@@ -1,5 +1,3 @@
-package Gnutella;
-
 import java.net.*;
 import java.util.*;
 
@@ -11,13 +9,13 @@ public class MySingleton {
 	private ArrayList<Integer> recvThreadFlag; //if recv thread (its socket list index is i) is active, recvflag[i] get 1
 //	private ArrayList<byte[]> messageID;
 	
-	private ArrayList<InfoNouveau> sentPingsList;
-	private ArrayList<InfoNouveau> sentQuerysList;
+	private ArrayList<MessageInfo> sentPingsList;
+	private ArrayList<MessageInfo> sentQuerysList;
 	
-	private  ArrayList<InfoNouveau> recvPongsList;
-	private  ArrayList<InfoNouveau> recvPingsList;
-	private  ArrayList<InfoNouveau> recvQuerysList;
-	private  ArrayList<InfoNouveau> recvQueryHitsList;
+	private  ArrayList<MessageInfo> recvPongsList;
+	private  ArrayList<MessageInfo> recvPingsList;
+	private  ArrayList<MessageInfo> recvQuerysList;
+	private  ArrayList<MessageInfo> recvQueryHitsList;
 	
 	private  ArrayList<ResultSet> resultSets;
 	private  int serverPortNumber;
@@ -28,13 +26,13 @@ public class MySingleton {
 	private MySingleton(){
 		socketList = new ArrayList<Socket>();
 		recvThreadFlag = new ArrayList<Integer>();
-		recvPongsList = new ArrayList<InfoNouveau>();
-		recvPingsList = new ArrayList<InfoNouveau>();
-		recvQuerysList = new ArrayList<InfoNouveau>();
-		recvQueryHitsList= new ArrayList<InfoNouveau>();
+		recvPongsList = new ArrayList<MessageInfo>();
+		recvPingsList = new ArrayList<MessageInfo>();
+		recvQuerysList = new ArrayList<MessageInfo>();
+		recvQueryHitsList= new ArrayList<MessageInfo>();
 
-		sentPingsList = new ArrayList<InfoNouveau>();
-		sentQuerysList = new ArrayList<InfoNouveau>();
+		sentPingsList = new ArrayList<MessageInfo>();
+		sentQuerysList = new ArrayList<MessageInfo>();
 		
 		resultSets = new ArrayList<ResultSet>();
 		zeroID = new byte[16];
@@ -42,7 +40,8 @@ public class MySingleton {
 			zeroID[i] = (byte)0;
 		}
 	}
-	public static MySingleton getInstance(){
+	public static MySingleton getInstance(int port){
+		obj.serverPortNumber = port;
 		return obj;
 	}
 	public static int getResultSetSize(){
@@ -51,9 +50,9 @@ public class MySingleton {
 	public static byte getNumHop(){
 		return obj.NUM_HOP;
 	}
-	public static void registServerPortNum(int port){
+	/*public static void registServerPortNum(int port){
 		obj.serverPortNumber = port;
-	}
+	}*/
 	public static int getServerPortNum(){
 		return obj.serverPortNumber;
 	}
@@ -61,7 +60,7 @@ public class MySingleton {
 	/*public static void addServentIdentifier(String s){
 		obj.serventIdentifier.add(s);
 	}*/
-	synchronized public static void addRecvPing(InfoNouveau info){
+	synchronized public static void addRecvPing(MessageInfo info){
 		byte[] id = Arrays.copyOf(info.ID, 16);
 		//byte[] zero = new byte[16];
 		
@@ -73,19 +72,19 @@ public class MySingleton {
 		}
 		
 	}
-	synchronized public static void addSentPing(InfoNouveau info){
+	synchronized public static void addSentPing(MessageInfo info){
 		obj.sentPingsList.add(info);
 	}
-	synchronized public static void addRecvPong(InfoNouveau info){
+	synchronized public static void addRecvPong(MessageInfo info){
 		obj.recvPongsList.add(info);
 	}
-	synchronized public static void addSentQuery(InfoNouveau info){
+	synchronized public static void addSentQuery(MessageInfo info){
 		obj.sentQuerysList.add(info);
 	}
-	synchronized public static void addRecvQuery(InfoNouveau info){
+	synchronized public static void addRecvQuery(MessageInfo info){
 		obj.recvQuerysList.add(info);
 	}
-	synchronized public static void addRecvQueryHit(InfoNouveau l){
+	synchronized public static void addRecvQueryHit(MessageInfo l){
 		obj.recvQueryHitsList.add(l);
 		for(int i = 0; i < l.resultSets.size(); i++){
 			ResultSet rset = l.resultSets.get(i);
@@ -108,7 +107,7 @@ public class MySingleton {
 		for(int i = 0; i < obj.resultSets.size(); i++){
 			System.out.println("\n----- Result Set Index: " + i + " -----");
 			ResultSet rSet = obj.resultSets.get(i);
-			InfoNouveau info = MySingleton.getInfo(rSet);
+			MessageInfo info = MySingleton.getInfo(rSet);
 			byte[] ipaddr = info.list.get(2);
 			//System.out.println("IP Address: ");
 			info.showIPAddressLittleEndian(ipaddr);
@@ -122,9 +121,9 @@ public class MySingleton {
 		return obj.resultSets.get(index);
 		
 	}
-	public static InfoNouveau getInfo(ResultSet rSet){
+	public static MessageInfo getInfo(ResultSet rSet){
 		for(int i = 0; i < obj.recvQueryHitsList.size(); i++){
-			InfoNouveau info = obj.recvQueryHitsList.get(i);
+			MessageInfo info = obj.recvQueryHitsList.get(i);
 			for(int j = 0; j < info.resultSets.size(); j++){
 				if(info.resultSets.get(j).equals(rSet)){
 					return info;
@@ -147,7 +146,7 @@ public class MySingleton {
 		}else{
 			System.out.println("**** SENT PING ****");
 			for(int i = 0; i < obj.sentPingsList.size(); i++){
-				InfoNouveau info = obj.sentPingsList.get(i);
+				MessageInfo info = obj.sentPingsList.get(i);
 				info.showPingInfo();
 			}
 		}
@@ -156,7 +155,7 @@ public class MySingleton {
 		}else{
 			System.out.println("**** SENT QUERY ****");
 			for(int i = 0; i < obj.sentQuerysList.size(); i++){
-				InfoNouveau info = obj.sentQuerysList.get(i);
+				MessageInfo info = obj.sentQuerysList.get(i);
 				info.showQueryInfo();
 			}	
 		}
@@ -167,7 +166,7 @@ public class MySingleton {
 			System.out.println("**** RECV PING ****");
 			for(int i = 0; i < obj.recvPingsList.size(); i++){
 				System.out.println("i = " + i);
-				InfoNouveau info = obj.recvPingsList.get(i);
+				MessageInfo info = obj.recvPingsList.get(i);
 				info.showPingInfo();
 			}	
 		}
@@ -179,7 +178,7 @@ public class MySingleton {
 			System.out.println("**** RECV PONG ****");
 			for(int i = 0; i < obj.recvPongsList.size(); i++){
 				System.out.println("i = " + i);
-				InfoNouveau info = obj.recvPongsList.get(i);
+				MessageInfo info = obj.recvPongsList.get(i);
 				info.showPongInfo();
 			}	
 		}
@@ -312,7 +311,7 @@ public class MySingleton {
 		}
 		return true;
 	}
-	synchronized public static  boolean checkRecvPong(InfoNouveau info){
+	synchronized public static  boolean checkRecvPong(MessageInfo info){
 		//this method returns false if my singleton includes info in recv pong
 		/*PONG
 		 * this.copyPong.add(this.payLoadLength);//0
@@ -341,7 +340,7 @@ public class MySingleton {
 		return true;
 		
 	}
-	synchronized public static  boolean checkRecvQueryHit(InfoNouveau info){
+	synchronized public static  boolean checkRecvQueryHit(MessageInfo info){
 		//this method returns false if my singleton includes info in recv pong
 		/*		QUERY HIT
 		this.copyQueryHit.add(this.payLoadLength);//0
