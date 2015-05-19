@@ -1,6 +1,3 @@
-import java.io.*;
-import java.net.*;
-
 public class Gnutella {
 
 	public static void main(String[] args) {
@@ -15,9 +12,6 @@ public class Gnutella {
 		userInterfaceThread.start();
 		
 		int serverPortNumber = Integer.parseInt(args[0]);
-		MySingleton singleton = MySingleton.getInstance(serverPortNumber);
-		//singleton.registServerPortNum(serverPortNumber);
-		
 		Server serv = new Server(serverPortNumber);
 		serv.start();
 	}

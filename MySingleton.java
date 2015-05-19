@@ -1,8 +1,6 @@
 import java.net.*;
 import java.util.*;
 
-import org.omg.CORBA.INTF_REPOS;
-
 public class MySingleton {
 	private ArrayList<Socket> socketList;
 
@@ -18,7 +16,6 @@ public class MySingleton {
 	private  ArrayList<MessageInfo> recvQueryHitsList;
 	
 	private  ArrayList<ResultSet> resultSets;
-	private  int serverPortNumber;
 	private final byte NUM_HOP = 7;
 	private byte[] zeroID;
 	private static MySingleton obj = new MySingleton();
@@ -40,8 +37,7 @@ public class MySingleton {
 			zeroID[i] = (byte)0;
 		}
 	}
-	public static MySingleton getInstance(int port){
-		obj.serverPortNumber = port;
+	public static MySingleton getInstance(){
 		return obj;
 	}
 	public static int getResultSetSize(){
@@ -49,12 +45,6 @@ public class MySingleton {
 	}
 	public static byte getNumHop(){
 		return obj.NUM_HOP;
-	}
-	/*public static void registServerPortNum(int port){
-		obj.serverPortNumber = port;
-	}*/
-	public static int getServerPortNum(){
-		return obj.serverPortNumber;
 	}
 	
 	/*public static void addServentIdentifier(String s){

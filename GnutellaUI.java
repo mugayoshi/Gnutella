@@ -59,7 +59,8 @@ public class GnutellaUI extends Thread{
 						sendQuery.start();
 					}
 				}else if(this.command.toUpperCase().equals("CONNECT") || 
-						this.command.toUpperCase().equals("CON")){//ex) connect localhost 8000
+						this.command.toUpperCase().equals("CON")){
+					//ex) connect (localhost or IP address) (port num e.g.8000)
 					
 					if(argument.length != 3){
 						System.out.println("Format de la Commande est Errone !!");
