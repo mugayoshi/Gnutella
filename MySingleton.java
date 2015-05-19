@@ -4,7 +4,8 @@ import java.util.*;
 public class MySingleton {
 	private ArrayList<Socket> socketList;
 
-	private ArrayList<Integer> recvThreadFlag; //if recv thread (its socket list index is i) is active, recvflag[i] get 1
+	private ArrayList<Integer> recvThreadFlag; 
+	//if recv thread (its socket list index is i) is active, recvflag[i] is 1
 //	private ArrayList<byte[]> messageID;
 	
 	private ArrayList<MessageInfo> sentPingsList;
@@ -14,6 +15,8 @@ public class MySingleton {
 	private  ArrayList<MessageInfo> recvPingsList;
 	private  ArrayList<MessageInfo> recvQuerysList;
 	private  ArrayList<MessageInfo> recvQueryHitsList;
+	
+	private int serverPortNum;
 	
 	private  ArrayList<ResultSet> resultSets;
 	private final byte NUM_HOP = 7;
@@ -39,6 +42,12 @@ public class MySingleton {
 	}
 	public static MySingleton getInstance(){
 		return obj;
+	}
+	public static void registerPortNum(int portNum){
+		obj.serverPortNum = portNum;
+	}
+	public static int getServerPortNum(){
+		return obj.serverPortNum;
 	}
 	public static int getResultSetSize(){
 		return obj.resultSets.size();

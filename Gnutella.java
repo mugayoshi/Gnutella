@@ -12,6 +12,7 @@ public class Gnutella {
 		userInterfaceThread.start();
 		
 		int serverPortNumber = Integer.parseInt(args[0]);
+		MySingleton.registerPortNum(serverPortNumber);
 		Server serv = new Server(serverPortNumber);
 		serv.start();
 	}
