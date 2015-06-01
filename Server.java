@@ -40,7 +40,7 @@ public class Server extends Thread{
 				while((in = br.readLine()) != null){
 					if(in.toUpperCase().contains("GNUTELLA")){
 
-						RecevoirNouveau recv = new RecevoirNouveau(this.clientSocket, 0);
+						RecvThread recv = new RecvThread(this.clientSocket, 0);
 						recv.start();
 						System.out.println("Server Thread: Recv Thread Starts");
 						break;
@@ -48,7 +48,7 @@ public class Server extends Thread{
 						System.out.println("Server Thread: Recv File Starts");
 						System.out.println(in);
 						String[] req = analyzeRequest(in);
-						EnvoyerFichier sendFile = new EnvoyerFichier(this.clientSocket, req);
+						SendFileThread sendFile = new SendFileThread(this.clientSocket, req);
 						sendFile.start();
 						break;
 					}

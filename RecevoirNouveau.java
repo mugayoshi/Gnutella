@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.io.*;
 
-public class RecevoirNouveau extends RecvThread{
+public class RecevoirNouveau extends Receive{
 	byte[] messageID;
 	byte TTL, HOP;
 	byte[] payLoadLength;

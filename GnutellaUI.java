@@ -133,7 +133,7 @@ public class GnutellaUI extends Thread{
 			while((line = inputstream.readLine()) != null){
 				if(line.contains("GNUTELLA")){
 					System.out.println("UI: " + line);
-					RecevoirNouveau recevoir = new RecevoirNouveau(destSocket, 1);
+					RecvThread recevoir = new RecvThread(destSocket, 1);
 					recevoir.start();
 					System.out.println("UI: Recevoir Fil Commence ");
 					//
