@@ -36,7 +36,7 @@ public class DescriptorHeader{
 			
 		}
 	}
-	public int getInt(byte[] b){
+	public int getIntValFromByteArray(byte[] b){
 		int[] in = new int[4];
 		for(int i = 0; i < 4; i++){
 			in [i] = b[i];
